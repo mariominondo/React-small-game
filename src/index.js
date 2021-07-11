@@ -1,22 +1,39 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
+//import App from './App';
 import reportWebVitals from './reportWebVitals';
 
 class Square extends React.Component {
   render() {
     return (
-      <button className="square">
-        {/* TODO */}
+      <button 
+        className="square" 
+        onClick={() => this.props.onClick()}
+      >
+        {this.props.value}
       </button>
     );
   }
 }
 
+
+
 class Board extends React.Component {
+  constructor(props){
+    super(props);
+    this.state = {
+      squares: Array(9).fill(null),
+    };
+  }
+
   renderSquare(i) {
-    return <Square />;
+    return (
+            <Square 
+              value={this.state.squares[i]} 
+              onClick={() => this.handleClick(i)}
+            />
+    );
   }
 
   render() {
@@ -26,7 +43,7 @@ class Board extends React.Component {
       <div>
         <div className="status">{status}</div>
         <div className="board-row">
-          {this.renderSquare(0)}
+          {this.renderSquare("hello")}
           {this.renderSquare(1)}
           {this.renderSquare(2)}
         </div>
@@ -64,7 +81,7 @@ class Game extends React.Component {
 // ========================================
 
 ReactDOM.render(
-  <App />,
+  <Game />,
   document.getElementById('root')
 );
 
